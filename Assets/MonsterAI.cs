@@ -18,8 +18,10 @@ public class MonsterAI : MonoBehaviour
     public int currentState;
     public Transform[] wanderPoints;
     float timeSincePlayerLastSeen;
+    Animator anim;
 
     void Start() {
+        anim = gameObject.GetComponent<Animator>();
         nav = gameObject.GetComponent<NavMeshAgent>();
         nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
     }
@@ -34,10 +36,12 @@ public class MonsterAI : MonoBehaviour
                 nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
+                anim.SetFloat("Speed", nav.speed);
             }
             //and it has reached it's destination, change it to a new random wander point
             if(Vector3.Distance(nav.destination, transform.position) < checkingDistanceBeforeChange) {
                 nav.speed = wanderSpeed;
+                anim.SetFloat("Speed", nav.speed);
                 nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
             }
         }
@@ -50,6 +54,7 @@ public class MonsterAI : MonoBehaviour
                 nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
+                anim.SetFloat("Speed", nav.speed);
             }
             //and it has reached it's destination without starting a hunt, go back to wandering
             if(Vector3.Distance(nav.destination, transform.position) < checkingDistanceBeforeChange) {
@@ -57,6 +62,7 @@ public class MonsterAI : MonoBehaviour
                 currentState = 0;
                 nav.speed = wanderSpeed;
                 nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
+                anim.SetFloat("Speed", nav.speed);
             }
         }
         //If hunting...
@@ -76,6 +82,7 @@ public class MonsterAI : MonoBehaviour
                     Debug.Log("Lost the player, wandering...");
                     currentState = 0;
                     nav.speed = investigateSpeed;
+                    anim.SetFloat("Speed", nav.speed);
                     nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
                 }
             }
@@ -93,6 +100,7 @@ public class MonsterAI : MonoBehaviour
         else
             nav.speed = investigateSpeed;
         //Then investigate that location
+        anim.SetFloat("Speed", nav.speed);
         nav.destination = t;
         currentState = 1;
         Debug.Log("Movement sensed by mushrooms, investigating...");
