@@ -28,10 +28,10 @@ public class MonsterAI : MonoBehaviour
         //If wandering...
         if(currentState == 0) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
                 Debug.Log("Player spotted during wander, hunting...");
                 currentState = 2;
-                nav.speed = huntSpeed;
+                nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
             }
@@ -44,10 +44,10 @@ public class MonsterAI : MonoBehaviour
         //If investigating...
         else if(currentState == 1) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
                 Debug.Log("Player spotted during investigation, hunting...");
                 currentState = 2;
-                nav.speed = huntSpeed;
+                nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
             }
@@ -67,7 +67,7 @@ public class MonsterAI : MonoBehaviour
             if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {
                 timeSincePlayerLastSeen += Time.deltaTime;
                 //and it has been too long since it last had the player in its range, return to wandering, but at a faster investigate speed
-                if(timeSincePlayerLastSeen > loseHuntDist) {
+                if(timeSincePlayerLastSeen > loseHuntTime * (SettingsManager.hardMode ? 1.5 : 1)) {
                     Debug.Log("Lost the player, wandering...");
                     currentState = 0;
                     nav.speed = investigateSpeed;
