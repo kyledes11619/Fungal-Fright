@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: 8349542763059015795
     second: Armature|Walk
+  - first:
+      74: 3800721468275536773
+    second: Armature|Walk (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -30,7 +33,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -52,8 +55,8 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
@@ -144,7 +147,142 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: monster(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Circle.001
+      parentName: monster(Clone)
+      position: {x: -1.6969629e-16, y: 0.76424414, z: -0.39061388}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: monster(Clone)
+      position: {x: -3.7785732e-16, y: 1.7017181, z: -0.081519425}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1343.4119, y: 1343.4119, z: 1343.4119}
+    - name: spine0
+      parentName: Armature
+      position: {x: -9.290755e-20, y: -0.0000023802359, z: -0.00032371297}
+      rotation: {x: 0.7082072, y: -0.000000082626855, z: -0.00000008612123, w: 0.7060047}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: spine1
+      parentName: spine0
+      position: {x: 1.6298144e-13, y: 0.0008241853, z: 1.6298144e-13}
+      rotation: {x: -0.0068202615, y: 0.00000012102859, z: -0.0000000011561996, w: 0.99997675}
+      scale: {x: 1.0000001, y: 1, z: 0.9999998}
+    - name: spine2
+      parentName: spine1
+      position: {x: -6.9674566e-12, y: 0.0006005216, z: -3.259629e-13}
+      rotation: {x: 0.00021270383, y: 0.00000011751831, z: 0.000000009921724, w: 1}
+      scale: {x: 1, y: 1, z: 0.99999976}
+    - name: spine2_end
+      parentName: spine2
+      position: {x: -0, y: 0.00062580395, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: leg0
+      parentName: spine0
+      position: {x: -0.00043151458, y: -0.00020666719, z: 0.00037228537}
+      rotation: {x: -0.665393, y: 0.12019317, z: 0.7364392, w: 0.021517918}
+      scale: {x: 1.0000008, y: 0.99999994, z: 1.0000007}
+    - name: leg1
+      parentName: leg0
+      position: {x: 1.1473894e-10, y: 0.00035115602, z: 2.0861625e-11}
+      rotation: {x: 0.20456143, y: -0.034250688, z: 0.23033848, w: -0.95075005}
+      scale: {x: 1.0000005, y: 0.99999994, z: 1.0000004}
+    - name: leg1_end
+      parentName: leg1
+      position: {x: -0, y: 0.00038222142, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: leg0.001
+      parentName: spine0
+      position: {x: -0.00034134055, y: -0.00020891914, z: -0.00035077345}
+      rotation: {x: -0.6740779, y: 0.15003857, z: 0.455727, w: 0.561623}
+      scale: {x: 1.0000004, y: 0.99999994, z: 1}
+    - name: leg1.001
+      parentName: leg0.001
+      position: {x: 2.933666e-11, y: 0.00041184327, z: -8.8661904e-11}
+      rotation: {x: 0.4666298, y: 0.16450103, z: -0.24581936, w: -0.83352804}
+      scale: {x: 1.0000001, y: 1.0000002, z: 0.99999976}
+    - name: leg1.001_end
+      parentName: leg1.001
+      position: {x: -0, y: 0.00038222142, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: leg0.002
+      parentName: spine0
+      position: {x: 0.00038582415, y: -0.00020878963, z: -0.00030918932}
+      rotation: {x: 0.9446378, y: 0.10881339, z: -0.30633083, w: -0.04450326}
+      scale: {x: 1, y: 0.99999994, z: 0.99999964}
+    - name: leg1.002
+      parentName: leg0.002
+      position: {x: 1.04308125e-11, y: 0.00037982393, z: -4.172325e-11}
+      rotation: {x: 0.07348175, y: -0.41515893, z: 0.18170658, w: 0.8883841}
+      scale: {x: 1.0000002, y: 1.0000007, z: 1.000001}
+    - name: leg1.002_end
+      parentName: leg1.002
+      position: {x: -0, y: 0.00038222136, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: leg0.003
+      parentName: spine0
+      position: {x: 0.0003930848, y: -0.00020652072, z: 0.00041932176}
+      rotation: {x: 0.8530067, y: 0.40169358, z: -0.073957324, w: 0.3248879}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1.0000001}
+    - name: leg1.003
+      parentName: leg0.003
+      position: {x: 6.2584875e-11, y: 0.0003035387, z: -5.3457915e-11}
+      rotation: {x: 0.45219156, y: -0.56735814, z: 0.074660994, w: 0.68414426}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000002}
+    - name: leg1.003_end
+      parentName: leg1.003
+      position: {x: -0, y: 0.0003822214, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: legIK
+      parentName: Armature
+      position: {x: -0.00067594164, y: -0.00059034285, z: -0.0007155698}
+      rotation: {x: -0.39896992, y: 0.025414735, z: 0.8266274, w: 0.39606097}
+      scale: {x: 1.0000007, y: 1.0000004, z: 1.0000006}
+    - name: legIK_end
+      parentName: legIK
+      position: {x: -0, y: 0.00042751065, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: legIK.001
+      parentName: Armature
+      position: {x: -0.000590526, y: 0.0005704558, z: -0.0011265754}
+      rotation: {x: -0.1826912, y: 0.06994622, z: 0.3906551, w: 0.89951104}
+      scale: {x: 1, y: 0.9999998, z: 1.0000001}
+    - name: legIK.001_end
+      parentName: legIK.001
+      position: {x: -0, y: 0.00042751062, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: legIK.002
+      parentName: Armature
+      position: {x: 0.0005991861, y: 0.0005544736, z: -0.00072536623}
+      rotation: {x: -0.16462597, y: -0.058900416, z: -0.2973473, w: 0.9386233}
+      scale: {x: 0.9999998, y: 0.99999994, z: 0.9999998}
+    - name: legIK.002_end
+      parentName: legIK.002
+      position: {x: -0, y: 0.00042751062, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: legIK.003
+      parentName: Armature
+      position: {x: 0.0007160559, y: -0.0006791994, z: -0.0010922188}
+      rotation: {x: 0.36853364, y: 0.052499294, z: 0.79161435, w: -0.48453438}
+      scale: {x: 0.9999999, y: 0.9999998, z: 0.99999994}
+    - name: legIK.003_end
+      parentName: legIK.003
+      position: {x: -0, y: 0.00042751062, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -152,16 +290,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0007
-    rootMotionBoneName: 
+    globalScale: 0.07
+    rootMotionBoneName: Armature
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
