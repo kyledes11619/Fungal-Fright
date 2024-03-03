@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public string scene;
+
+    public void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("BasementEntrance"))
-        {
-            SceneManager.LoadScene("Basement");
-        }
+        if(other.collider.GetComponent<PlayerController>() != null)
+            SceneManager.LoadScene(scene);
     }
 }

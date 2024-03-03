@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2867610060171437083}
   - component: {fileID: 7934429379216065273}
   - component: {fileID: -4949681753952371309}
-  - component: {fileID: 1894863355783949632}
   - component: {fileID: 7862158098842905282}
+  - component: {fileID: 905510766218816390}
   m_Layer: 0
-  m_Name: DONOTUSETESTROCK
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8420736171576845534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8420736171576845534}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2837682660325928517, guid: e32aba419479968459722062cb6f6af7, type: 3}
 --- !u!23 &7934429379216065273
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88aaad4620f318f4c80a2adfbc382bbc, type: 2}
+  - {fileID: -3017610626924319037, guid: e32aba419479968459722062cb6f6af7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,19 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c291e3b1354163458a857e1495b458f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1894863355783949632
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8420736171576845534}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7862158098842905282
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,3 +114,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &905510766218816390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420736171576845534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.018458147, y: 0.016904064, z: 0.021208331}
+  m_Center: {x: 0.0007005059, y: 0.00025572907, z: -0.00022240588}
