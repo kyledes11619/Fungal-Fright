@@ -14,7 +14,7 @@ public class MonsterAI : MonoBehaviour
     }
 
     NavMeshAgent nav;
-    public float wanderSpeed, investigateSpeed, huntSpeed, checkingDistanceBeforeChange, mushroomSenseDistance, playerSenseDistance, loseHuntDist, loseHuntTime;
+    public float wanderSpeed, investigateSpeed, huntSpeed, checkingDistanceBeforeChange, mushroomSenseDistance, playerSenseDistance, loseHuntDist, loseHuntTime, killRange;
     public int currentState;
     public Transform[] wanderPoints;
     float timeSincePlayerLastSeen;
@@ -63,8 +63,13 @@ public class MonsterAI : MonoBehaviour
         else if(currentState == 2) {
             //Track player
             nav.destination = PlayerController.instance.transform.position;
+            //and if the player is in killing range...
+            if(Vector3.Distance(nav.destination, transform.position) > killRange) {
+                Time.timeScale = 0;
+                PlayerController.instance.EndLevel(false);
+            }
             //and the player is out of range...
-            if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {
+            else if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {
                 timeSincePlayerLastSeen += Time.deltaTime;
                 //and it has been too long since it last had the player in its range, return to wandering, but at a faster investigate speed
                 if(timeSincePlayerLastSeen > loseHuntTime * (SettingsManager.hardMode ? 1.5 : 1)) {
