@@ -13,11 +13,13 @@ public class Pause : MonoBehaviour
         {
             Time.timeScale = pauseMenu.activeSelf ? 1f : 0f;
             pauseMenu.SetActive(!pauseMenu.activeSelf);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
     public void Unpause() {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

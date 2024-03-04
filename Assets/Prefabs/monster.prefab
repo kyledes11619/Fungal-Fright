@@ -182,7 +182,7 @@ MonoBehaviour:
   playerSenseDistance: 8
   loseHuntDist: 3
   loseHuntTime: 3
-  killRange: 0
+  killRange: 2
   currentState: 0
   wanderPoints:
   - {fileID: 0}

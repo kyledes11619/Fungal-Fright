@@ -18,24 +18,28 @@ public class MonsterAI : MonoBehaviour
     public int currentState;
     public Transform[] wanderPoints;
     float timeSincePlayerLastSeen;
+    float playerRunSenseDistance;
     Animator anim;
+    public AudioSource huntSFX, killSFX;
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
         nav = gameObject.GetComponent<NavMeshAgent>();
         nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
+        playerRunSenseDistance = 2 *playerSenseDistance;
     }
 
     void Update() {
         //If wandering...
         if(currentState == 0) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1) || (Input.GetButton("Fire3") && Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerRunSenseDistance * (SettingsManager.hardMode ? 1.5 : 1))) {
                 Debug.Log("Player spotted during wander, hunting...");
                 currentState = 2;
                 nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
+                huntSFX.Play();
                 anim.SetFloat("Speed", nav.speed);
             }
             //and it has reached it's destination, change it to a new random wander point
@@ -48,13 +52,14 @@ public class MonsterAI : MonoBehaviour
         //If investigating...
         else if(currentState == 1) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1) || (Input.GetButton("Fire3") && Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerRunSenseDistance * (SettingsManager.hardMode ? 1.5 : 1))) {
                 Debug.Log("Player spotted during investigation, hunting...");
                 currentState = 2;
                 nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
                 anim.SetFloat("Speed", nav.speed);
+                huntSFX.Play();
             }
             //and it has reached it's destination without starting a hunt, go back to wandering
             if(Vector3.Distance(nav.destination, transform.position) < checkingDistanceBeforeChange) {
@@ -70,9 +75,12 @@ public class MonsterAI : MonoBehaviour
             //Track player
             nav.destination = PlayerController.instance.transform.position;
             //and if the player is in killing range...
-            if(Vector3.Distance(nav.destination, transform.position) > killRange) {
+            if(Vector3.Distance(nav.destination, transform.position) < killRange) {
+                //Kill the player and turn off the AI
                 Time.timeScale = 0;
                 PlayerController.instance.EndLevel(false);
+                currentState = -1;
+                killSFX.Play();
             }
             //and the player is out of range...
             else if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {

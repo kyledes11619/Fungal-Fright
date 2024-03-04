@@ -22,13 +22,14 @@ public class PlayerController : MonoBehaviour
     public GameObject throwableRock;
     public Transform rockThrowPoint;
     public float rockThrowForce;
-    public GameObject endScreen;
-    public Text endText, endBottomText;
-    string[] tipsForTheDead = {"Avoid stepping on the mushrooms, they call the monster", "Don't get too close to the monster or it'll chase you", "As long as the monster hasn't seen you, you can throw a rock at another mushroom for it to call them", "You can pick your rocks back up after throwing them to reuse them"};
+    public GameObject endScreen, winText, loseText;
+    public Text endBottomText;
+    string[] tipsForTheDead = {"Avoid stepping on the mushrooms, they call the monster", "Don't get too close to the monster or it'll chase you", "As long as the monster hasn't seen you, you can throw a rock at another mushroom for it to call them", "You can pick your rocks back up after throwing them to reuse them", "The monster can hear you from further away when you run"};
 
     void Start() {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -47,13 +48,14 @@ public class PlayerController : MonoBehaviour
 
     public void EndLevel(bool win) {
         if(win) {
-            endText.text = "You win!";
+            winText.SetActive(true);
             endBottomText.text = "You survived and escaped the Monster!";
         }
         else {
-            endText.text = "You died!";
+            loseText.SetActive(true);
             endBottomText.text = tipsForTheDead[Random.Range(0, tipsForTheDead.Length)];
         }
+        Cursor.lockState = CursorLockMode.None;
         endScreen.SetActive(true);
     }
 }

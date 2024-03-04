@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Menu : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    public bool hard;
-    public bool mute;
-
-    public Toggle DifficultyToggle;
-    public Toggle SoundToggle;
-
     public void ExitButton()
     {
         Application.Quit();
@@ -20,20 +14,15 @@ public class Menu : MonoBehaviour
     public void PlayButton()
     {
         //Menu.LoadScene("CabinLevel");
-        UnityEngine.SceneManagement.SceneManager.LoadScene( "CabinLevel");
+        SceneManager.LoadScene( "CabinLevel");
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void GoToMenu() {
+        SceneManager.LoadScene( "Menu");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        hard = DifficultyToggle.isOn;
-        mute = SoundToggle.isOn;
+    public void Retry() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
