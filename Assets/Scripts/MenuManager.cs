@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Menu : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-        public void ExitButton()
+    public bool hard;
+    public bool mute;
+
+    public Toggle DifficultyToggle;
+    public Toggle SoundToggle;
+
+    public void ExitButton()
     {
         Application.Quit();
         Debug.Log("Game Closed");
@@ -27,6 +33,7 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hard = DifficultyToggle.isOn;
+        mute = SoundToggle.isOn;
     }
 }

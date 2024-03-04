@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class MenuManager : MonoBehaviour
+public class Menu : MonoBehaviour
 {
-    public Slider brightness;
-    public float boundVariable;
+    public bool hard;
+    public bool mute;
 
-        public void ExitButton()
+    public Toggle DifficultyToggle;
+    public Toggle SoundToggle;
+
+    public void ExitButton()
     {
         Application.Quit();
         Debug.Log("Game Closed");
@@ -16,12 +19,9 @@ public class MenuManager : MonoBehaviour
 
     public void PlayButton()
     {
+        //Menu.LoadScene("CabinLevel");
         UnityEngine.SceneManagement.SceneManager.LoadScene( "CabinLevel");
-    }
 
-        public void OnSliderValueChanged(float value)
-    {
-        boundVariable = value;
     }
 
     // Start is called before the first frame update
@@ -33,6 +33,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        brightness.value = boundVariable;
+        hard = DifficultyToggle.isOn;
+        mute = SoundToggle.isOn;
     }
 }
