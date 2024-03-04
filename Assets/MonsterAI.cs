@@ -14,12 +14,14 @@ public class MonsterAI : MonoBehaviour
     }
 
     NavMeshAgent nav;
-    public float wanderSpeed, investigateSpeed, huntSpeed, checkingDistanceBeforeChange, mushroomSenseDistance, playerSenseDistance, loseHuntDist, loseHuntTime;
+    public float wanderSpeed, investigateSpeed, huntSpeed, checkingDistanceBeforeChange, mushroomSenseDistance, playerSenseDistance, loseHuntDist, loseHuntTime, killRange;
     public int currentState;
     public Transform[] wanderPoints;
     float timeSincePlayerLastSeen;
+    Animator anim;
 
     void Start() {
+        anim = gameObject.GetComponent<Animator>();
         nav = gameObject.GetComponent<NavMeshAgent>();
         nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
     }
@@ -28,28 +30,31 @@ public class MonsterAI : MonoBehaviour
         //If wandering...
         if(currentState == 0) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
                 Debug.Log("Player spotted during wander, hunting...");
                 currentState = 2;
-                nav.speed = huntSpeed;
+                nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
+                anim.SetFloat("Speed", nav.speed);
             }
             //and it has reached it's destination, change it to a new random wander point
             if(Vector3.Distance(nav.destination, transform.position) < checkingDistanceBeforeChange) {
                 nav.speed = wanderSpeed;
+                anim.SetFloat("Speed", nav.speed);
                 nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
             }
         }
         //If investigating...
         else if(currentState == 1) {
             //and it runs into a player, hunt the player
-            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance) {
+            if(Vector3.Distance(PlayerController.instance.transform.position, transform.position) < playerSenseDistance * (SettingsManager.hardMode ? 1.5 : 1)) {
                 Debug.Log("Player spotted during investigation, hunting...");
                 currentState = 2;
-                nav.speed = huntSpeed;
+                nav.speed = (SettingsManager.hardMode ? PlayerController.instance.runSpeed : huntSpeed);
                 nav.destination = PlayerController.instance.transform.position;
                 timeSincePlayerLastSeen = 0;
+                anim.SetFloat("Speed", nav.speed);
             }
             //and it has reached it's destination without starting a hunt, go back to wandering
             if(Vector3.Distance(nav.destination, transform.position) < checkingDistanceBeforeChange) {
@@ -57,20 +62,27 @@ public class MonsterAI : MonoBehaviour
                 currentState = 0;
                 nav.speed = wanderSpeed;
                 nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
+                anim.SetFloat("Speed", nav.speed);
             }
         }
         //If hunting...
         else if(currentState == 2) {
             //Track player
             nav.destination = PlayerController.instance.transform.position;
+            //and if the player is in killing range...
+            if(Vector3.Distance(nav.destination, transform.position) > killRange) {
+                Time.timeScale = 0;
+                PlayerController.instance.EndLevel(false);
+            }
             //and the player is out of range...
-            if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {
+            else if(Vector3.Distance(nav.destination, transform.position) > loseHuntDist) {
                 timeSincePlayerLastSeen += Time.deltaTime;
                 //and it has been too long since it last had the player in its range, return to wandering, but at a faster investigate speed
-                if(timeSincePlayerLastSeen > loseHuntDist) {
+                if(timeSincePlayerLastSeen > loseHuntTime * (SettingsManager.hardMode ? 1.5 : 1)) {
                     Debug.Log("Lost the player, wandering...");
                     currentState = 0;
                     nav.speed = investigateSpeed;
+                    anim.SetFloat("Speed", nav.speed);
                     nav.destination = wanderPoints[Random.Range(0, wanderPoints.Length)].position;
                 }
             }
@@ -88,6 +100,7 @@ public class MonsterAI : MonoBehaviour
         else
             nav.speed = investigateSpeed;
         //Then investigate that location
+        anim.SetFloat("Speed", nav.speed);
         nav.destination = t;
         currentState = 1;
         Debug.Log("Movement sensed by mushrooms, investigating...");
